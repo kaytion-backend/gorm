@@ -476,7 +476,7 @@ func (s *DB) Debug() *DB {
 	return s.clone().LogMode(true)
 }
 
-func (s *DB) Debug() *DB {
+func (s *DB) ErrDebug() *DB {
 	s.logMode = 3
 	return s
 }
