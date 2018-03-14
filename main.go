@@ -476,6 +476,11 @@ func (s *DB) Debug() *DB {
 	return s.clone().LogMode(true)
 }
 
+func (s *DB) Debug() *DB {
+	s.logMode = 3
+	return s
+}
+
 // Begin begin a transaction
 func (s *DB) Begin() *DB {
 	c := s.clone()
@@ -772,6 +777,9 @@ func (s *DB) log(v ...interface{}) {
 
 func (s *DB) slog(sql string, t time.Time, vars ...interface{}) {
 	if s.logMode == 2 {
+		s.print("sql", fileWithLineNum(), NowFunc().Sub(t), sql, vars, s.RowsAffected)
+	}
+	if s.logMode == 3 && s.Error != nil {
 		s.print("sql", fileWithLineNum(), NowFunc().Sub(t), sql, vars, s.RowsAffected)
 	}
 }
