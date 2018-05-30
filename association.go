@@ -21,6 +21,7 @@ func (association *Association) Find(value interface{}) *Association {
 }
 
 // Append append new associations for many2many, has_many, replace current association for has_one, belongs_to
+// change something, pull request test
 func (association *Association) Append(values ...interface{}) *Association {
 	if association.Error != nil {
 		return association
